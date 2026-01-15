@@ -808,7 +808,7 @@ button.inactive {
 
 /* RESPONSIVE */
 
-@media (max-width: 1200px) {
+@media (max-width: 1440px) {
   /* Main container becomes two columns */
   #main-container {
     display: grid;
@@ -911,4 +911,5 @@ flex-direction: column;
 }
 
 }
+
 
