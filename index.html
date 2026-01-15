@@ -29,16 +29,13 @@
           <div id="sort-controls">
             <button id="resetBtn">Reset Filters</button>
           </div>
-          <div id="numeric-filters">
-            <div class="ToggleButton">
-              <button id="toggleOrderBtn" class="sort-toggle">
-                <span class="sort-icon asc">▲</span>
-                <span class="sort-icon desc">▼</span>
-              </button>
-            </div>
-
-            <!-- numeric filter buttons injected by JS -->
+          <div class="ToggleButton">
+            <button id="toggleOrderBtn" class="sort-toggle">
+              <span class="sort-icon asc">▲</span>
+              <span class="sort-icon desc">▼</span>
+            </button>
           </div>
+          <div id="numeric-filters"></div>
         </section>
       </div>
 
@@ -61,23 +58,22 @@
           </div>
         </div>
 
-<section class="display-block">
-  <div id="display" style="position: relative">
-    <!-- Arrows and top-right button -->
-    <button class="nav-arrow-left" id="prevBtn">◄</button>
-    <button id="showImageBtn" class="top-right-btn">Show Image</button>
-    <button class="nav-arrow-right" id="nextBtn">►</button>
+        <section class="display-block">
+          <div id="display" style="position: relative">
+            <!-- Arrows and top-right button -->
+            <button class="nav-arrow-left" id="prevBtn">◄</button>
+            <button id="showImageBtn" class="top-right-btn">Show Image</button>
+            <button class="nav-arrow-right" id="nextBtn">►</button>
 
-    <!-- Image container -->
-    <div class="image-wrapper" id="image-wrapper"></div>
+            <!-- Image container -->
+            <div class="image-wrapper" id="image-wrapper"></div>
 
-    <!-- Extra modal image -->
-    <div id="imageModal" class="extra-image">
-      <img src="images/extra.png" alt="Extra Image" />
-    </div>
-  </div>
-</section>
-
+            <!-- Extra modal image -->
+            <div id="imageModal" class="extra-image">
+              <img src="images/extra.png" alt="Extra Image" />
+            </div>
+          </div>
+        </section>
       </div>
 
       <!-- END MAIN CONTAINER -->
