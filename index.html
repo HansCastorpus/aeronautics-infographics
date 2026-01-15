@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Filter UI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Nabla&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="overall-container">
+      <!-- <img class="Mockup" src="images/MockupWireframe.png" alt="description of image" /> -->
+      <div class="left-column">
+        <div class="Information">
+          <div class="Title">aerographics</div>
+          <div class="Text">
+            This is an exhaustive repertoire of infographics for every plane
+            ever built (eventually). This will show both military and civilian
+            aircraft from all the different eras of aviation history.
+          </div>
+        </div>
+
+        <!-- LEFT COLUMN: Numeric Filters & Sort -->
+        <section id="numeric-sort-block" class="filter-block">
+          <div id="sort-controls">
+            <button id="resetBtn">Reset Filters</button>
+          </div>
+          <div id="numeric-filters">
+            <div class="ToggleButton">
+              <button id="toggleOrderBtn" class="sort-toggle">
+                <span class="sort-icon asc">▲</span>
+                <span class="sort-icon desc">▼</span>
+              </button>
+            </div>
+
+            <!-- numeric filter buttons injected by JS -->
+          </div>
+        </section>
+      </div>
+
+      <!-- RIGHT COLUMN: Main Container -->
+      <div id="main-container">
+        <div class="Header">
+          <div class="Header-Title">
+            AERONAUTICS<br />
+            INFOGRAPHICS
+          </div>
+
+          <div class="MenuTop">
+            <section class="filter-block" id="continent-country-block">
+              <div id="filters"></div>
+            </section>
+
+            <section class="filter-block" id="extra-filters-block">
+              <div id="extra-filters"></div>
+            </section>
+          </div>
+        </div>
+
+<section class="display-block">
+  <div id="display" style="position: relative">
+    <!-- Arrows and top-right button -->
+    <button class="nav-arrow-left" id="prevBtn">◄</button>
+    <button id="showImageBtn" class="top-right-btn">Show Image</button>
+    <button class="nav-arrow-right" id="nextBtn">►</button>
+
+    <!-- Image container -->
+    <div class="image-wrapper" id="image-wrapper"></div>
+
+    <!-- Extra modal image -->
+    <div id="imageModal" class="extra-image">
+      <img src="images/extra.png" alt="Extra Image" />
+    </div>
+  </div>
+</section>
+
+      </div>
+
+      <!-- END MAIN CONTAINER -->
+    </div>
+    <!-- END overall-container -->
+    <script src="script.js"></script>
+  </body>
+</html>
