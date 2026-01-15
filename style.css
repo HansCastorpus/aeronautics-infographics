@@ -158,7 +158,7 @@ button.inactive {
   flex-shrink: 0;
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1440px) {
   .left-column {
     flex: 0 0 110px;
     max-width: 110px;
@@ -374,7 +374,7 @@ button.inactive {
   box-shadow: 0 0 3px #cfc8ba50;
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1440px) {
   .country-buttons button span {
     display: none;
   }
@@ -408,7 +408,7 @@ button.inactive {
   flex-shrink: 0;
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1440px) {
   .continent-group > button span {
     display: none;
   }
@@ -531,7 +531,7 @@ button.inactive {
 }
 
 /* Responsive: hide dropdown text on smaller screens */
-@media (max-width: 1400px) {
+@media (max-width: 1440px) {
   .dropdown-filter > button span {
     display: none; /* keeps icon and arrow only */
   }
@@ -609,7 +609,7 @@ button.inactive {
   flex-shrink: 0;
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1440px) {
   #display img {
     width: 100%;
     height: 50%;
@@ -655,7 +655,7 @@ button.inactive {
 }
 
 /* ------------------- LEFT COLUMN RESPONSIVE ------------------- */
-@media (max-width: 1400px) {
+@media (max-width: 1440px) {
   /* Shrink left column */
   .left-column {
     flex: 0 0 60px;
@@ -911,5 +911,4 @@ flex-direction: column;
 }
 
 }
-
 
