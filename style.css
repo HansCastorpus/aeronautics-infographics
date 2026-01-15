@@ -7,7 +7,7 @@
   --accent-color: #e6e4e2;
   --border-button-color: #cfccc7;
   --clicked-button: #7c8e84;
-  --clicked-text: #132429;
+  --clicked-text: #3b484d;
 }
 
 body {
@@ -32,6 +32,8 @@ button {
   border: 0.01px solid var(--border-button-color);
   cursor: pointer;
   align-items: center;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 button:hover {
@@ -158,28 +160,11 @@ button.inactive {
   flex-shrink: 0;
 }
 
-@media (max-width: 1440px) {
-  .left-column {
-    flex: 0 0 110px;
-    max-width: 110px;
-  }
-
-  #numeric-filters {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 6px;
-    justify-items: center;
-  }
-
-  #toggleOrderBtn {
-    grid-column: span 2;
-  }
-}
-
 /* ---- SORT TOGGLE ---- */
 
 .ToggleButton {
-  display: flex;
+    padding-bottom: 10px;
+    padding-top: 10px;
 }
 
 .sort-toggle {
@@ -217,8 +202,8 @@ button.inactive {
 #toggleOrderBtn {
   color: #000000;
   flex-direction: column;
-  width: 20% !important;
-  margin-top: 20px;
+  /* width: 20% !important; */
+  /* margin-top: 20px; */
 }
 
 /* =========================================================
@@ -248,8 +233,8 @@ button.inactive {
   flex-direction: column;
   height: 100%;
   /* padding-bottom: 10px; */
-  /* padding-top: 10px; */
-  border: #005fa3 2px solid;
+  padding-top: 10px;
+  /* border: #005fa3 2px solid; */
 }
 
 .Header {
@@ -654,33 +639,43 @@ button.inactive {
   background-color: rgba(0, 0, 0, 0.6);
 }
 
-/* ------------------- LEFT COLUMN RESPONSIVE ------------------- */
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+/* ================= LEFT COLUMN — RESPONSIVE ================= */
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
 @media (max-width: 1440px) {
-  /* Shrink left column */
+  /* ---------- Column container ---------- */
   .left-column {
-    flex: 0 0 60px;
-    max-width: 60px;
-    padding-left: 5px;
-    padding-right: 5px;
-    overflow: hidden; /* keep all content inside */
+    max-width: 120px;
+    padding: 0 5px;
+    overflow: hidden;
   }
 
-  /* Hide info text */
+  /* Hide descriptive text */
   .Information .Title,
   .Information .Text {
     display: none;
   }
 
+  /* ---------- Numeric filters grid ---------- */
   #numeric-filters {
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto; /* default */
+    gap: 6px;
+    padding-top: 6px;
+    align-items: stretch;
   }
 
-  /* Numeric filter buttons: square and centered */
   #numeric-filters button {
-    width: 54px;
-    height: 54px;
-    padding: 0;
+    display: flex;
     justify-content: center;
     align-items: center;
   }
@@ -692,59 +687,14 @@ button.inactive {
   #numeric-filters button img {
     width: 40px;
     height: 40px;
-    margin: 0;
   }
 
-  /* Reset button: square, aligned with numeric buttons */
+  /* ---------- Sort / reset controls ---------- */
   #sort-controls {
-    padding: 6px;
     display: flex;
     justify-content: center;
   }
 
-  #sort-controls button#resetBtn {
-    width: 48px;
-    height: 48px;
-    padding: 0;
-    font-size: 0; /* hide text */
-    justify-content: left;
-    align-items: center;
-  }
-
-  /* Sort toggle button: stack arrows vertically, square, aligned */
-  #toggleOrderBtn {
-    width: 48px !important;
-    height: 48px;
-    padding: 0;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 6px; /* small spacing from numeric buttons */
-  }
-
-  #toggleOrderBtn span {
-    display: none;
-  }
-
-  #toggleOrderBtn .sort-icon {
-    font-size: 16px;
-    opacity: 0.7;
-    display: block;
-    line-height: 1;
-  }
-
-  #toggleOrderBtn.asc-active .asc,
-  #toggleOrderBtn.desc-active .desc {
-    opacity: 1;
-  }
-
-  /* Reduce gaps between numeric buttons to fit */
-  #numeric-filters {
-    gap: 6px;
-    padding-top: 6px;
-  }
-
-  /* Ensure numeric-sort-block fits fully */
   #numeric-sort-block {
     display: flex;
     flex-direction: column;
@@ -752,29 +702,66 @@ button.inactive {
     min-width: 0;
   }
 
-  .toggleButton {
+  /* ---------- Reset button ---------- */
+  #resetBtn {
+    position: relative;
+    width: 100%;
+    height: 55px;
     padding: 0;
+    font-size: 0; /* hide original text */
     display: flex;
+    align-items: center;
     justify-content: center;
   }
 
-  #resetBtn {
-    position: relative;
-    font-size: 0; /* hide original text */
-  }
-
-  /* Add the capital R inside the button */
   #resetBtn::after {
-    content: "R";
-    font-size: 20px;
-    font-weight: 700;
-    color: #cfc8ba; /* or whatever matches your theme */
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    content: "Reset Filters";
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--clicked-text);
     pointer-events: none;
   }
+
+  /* ---------- Sort toggle ---------- */
+  #numeric-filters .ToggleButton {
+    grid-column: 1 / -1; /* full width */
+    height: 55px;        /* fixed height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 8px;  /* optional spacing */
+  }
+
+  #toggleOrderBtn {
+    width: 48px;
+    height: 48px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #toggleOrderBtn .sort-icon {
+    display: block;
+    font-size: 16px;
+    line-height: 1;
+    opacity: 0.7;
+  }
+
+  #toggleOrderBtn.asc-active .asc,
+  #toggleOrderBtn.desc-active .desc {
+    opacity: 1;
+  }
+
+  /* ---------- Toggle wrapper ---------- */
+  .ToggleButton {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px; /* space between toggle and numeric buttons */
+  }
+}
+
+#numeric-filters .ToggleButton {
+  grid-column: 1 / -1; /* spans full width of grid */
 }
 
 /* Initially hide the image */
@@ -807,6 +794,15 @@ button.inactive {
 }
 
 /* RESPONSIVE */
+/* ======================================================================= */
+/* ======================================================================= */
+/* ======================================================================= */
+/* ======================================================================= */
+/* ======================================================================= */
+/* ======================================================================= */
+/* ======================================================================= */
+/* ======================================================================= */
+/* ======================================================================= */
 
 @media (max-width: 1440px) {
   /* Main container becomes two columns */
@@ -819,13 +815,13 @@ button.inactive {
 
   /* Remove vertical stacking behavior */
   .Header-Title {
-     display: none;
+    display: none;
   }
 
   #main-container {
     display: grid;
     grid-template-columns: 1fr auto; /* Image left, MenuTop right */
-    grid-template-rows: 1fr;          /* single row for image + menu */
+    grid-template-rows: 1fr; /* single row for image + menu */
     gap: 16px;
     align-items: start;
   }
@@ -841,74 +837,269 @@ button.inactive {
     display: flex;
     flex-direction: column; /* stack buttons vertically */
     align-items: flex-start;
-    max-height: 100vh;      /* ensure it doesn’t overflow the viewport */
+    max-height: 100vh; /* ensure it doesn’t overflow the viewport */
   }
 
-#continent-country-block {
-  width: 100%;
-}
+  #continent-country-block {
+    width: 100%;
+  }
 
-#filters {
-  display: inline-flex; /* shrink-wrap content */
-  gap: 15px;
-  padding-bottom: 10px;
-  border-bottom: #7c8e84 solid 0.25px;
-flex-direction: column;
-}
+  #filters {
+    display: inline-flex; /* shrink-wrap content */
+    gap: 15px;
+    padding-bottom: 10px;
+    border-bottom: #7c8e84 solid 0.25px;
+    flex-direction: column;
+  }
 
-.continent-group {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  box-sizing: border-box;
-  gap: 5px;
-  width: 95px;
-}
+  .continent-group {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    box-sizing: border-box;
+    gap: 5px;
+    width: 84px;
+  }
 
-.country-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-}
+  .country-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
 
-.country-buttons button {
-  display: flex; /* use flex to allow gap */
-  flex-direction: row; /* stack image on top of text */
-  align-items: center; /* center horizontally */
-  justify-content: center; /* center vertically */
-  gap: 4px; /* spacing between image and text */
-  padding: 6px 10px;
-  flex-shrink: 1; /* allow button to shrink */
-  min-width: 0; /* remove any min width */
-  box-sizing: border-box;
-}
+  .country-buttons button {
+    display: flex; /* use flex to allow gap */
+    flex-direction: row; /* stack image on top of text */
+    align-items: center; /* center horizontally */
+    justify-content: center; /* center vertically */
+    gap: 4px; /* spacing between image and text */
+    padding: 6px 10px;
+    flex-shrink: 1; /* allow button to shrink */
+    min-width: 0; /* remove any min width */
+    box-sizing: border-box;
+  }
 
-.continent-group > button {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  flex-shrink: 1; /* allow shrinking */
-  min-width: 0; /* remove any minimum imposed by flex */
-}
+  .continent-group > button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    flex-shrink: 1; /* allow shrinking */
+    min-width: 0; /* remove any minimum imposed by flex */
+    width: 100;
+  }
 
-.country-buttons button img {
-  width: 20px;
-  height: 20px;
-  border-radius: 25px;
-  transition: filter 0.2s;
-  /* border: #cfc8ba solid 1.5px; */
-  flex-shrink: 0; /* prevents image from shrinking too small */
-  box-shadow: 0 0 3px #cfc8ba50;
-}
+  .country-buttons button img {
+    width: 20px;
+    height: 20px;
+    border-radius: 25px;
+    transition: filter 0.2s;
+    /* border: #cfc8ba solid 1.5px; */
+    flex-shrink: 0; /* prevents image from shrinking too small */
+    box-shadow: 0 0 3px #cfc8ba50;
+  }
 
-#extra-filters {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  gap: 5px;
-}
+  #extra-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex-wrap: wrap;
+    height: 193px;
+  }
 
-}
+  /* ---------------- DROPDOWN FILTERS ---------------- */
 
+  .dropdown-filter {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .dropdown-button-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50px;
+  }
+
+  .dropdown-filter button span {
+    display: inline;
+  }
+
+  .dropdown-filter > button {
+    font-weight: 500;
+    background-color: var(--accent-color);
+    color: #08151d;
+    padding: 0px 0px;
+    border-radius: 20px;
+    border: 0.01px solid var(--border-button-color);
+    cursor: pointer;
+    align-items: center;
+    display: inline-flex;
+    justify-content: flex-start;
+    gap: 6px;
+  }
+
+  .dropdown-filter > button.active {
+    background-color: var(--clicked-button);
+  }
+
+  /* Dropdown panel styling */
+  .dropdown-panel {
+    position: absolute;
+    top: 125%;
+    left: 0;
+    transform: translate(
+      20px
+    ) !important; /* X = right offset, Y = upward offset */
+    padding: 20px;
+    margin-bottom: 10px;
+    background: #08151d;
+    border: #2a3747 solid 2px;
+    border-radius: 6px;
+    box-shadow: 0px 5px 2px rgba(0, 0, 0, 0.2);
+    max-height: 200px;
+    overflow-y: auto;
+    transition: all 0.25s ease;
+    z-index: 1000;
+    width: max-content;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    color: #cfc8ba;
+  }
+
+  /* Hide native checkbox */
+  .dropdown-panel input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid black;
+    background: white;
+    cursor: pointer;
+    position: relative;
+    border-radius: 2px; /* optional */
+  }
+
+  /* Draw black checkmark when selected */
+  .dropdown-panel input[type="checkbox"]:checked::after {
+    content: "X";
+    color: black;
+    font-size: 14px;
+    position: absolute;
+    top: -4px;
+    left: 0.7px;
+    font-weight: bold;
+  }
+
+  /* Each row inside the dropdown panel */
+  .dropdown-panel label {
+    display: flex;
+    flex-direction: row; /* checkbox left, text right */
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%; /* fill the panel width */
+    gap: 6px;
+  }
+
+  /* Text inside panel labels */
+  .dropdown-panel label span {
+    white-space: nowrap; /* prevent wrapping */
+  }
+
+  /* Responsive: hide dropdown text on smaller screens */
+  @media (max-width: 1440px) {
+    .dropdown-filter > button span {
+      display: none; /* keeps icon and arrow only */
+    }
+
+    .dropdown-button-icon {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  /* =========================================================
+   COUNTRY BUTTONS
+   ========================================================= */
+
+  .country-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+  }
+
+  .country-buttons button {
+    display: flex; /* use flex to allow gap */
+    flex-direction: row; /* stack image on top of text */
+    align-items: center; /* center horizontally */
+    justify-content: center; /* center vertically */
+    gap: 4px; /* spacing between image and text */
+    padding: 2px 2px;
+    flex-shrink: 1; /* allow button to shrink */
+    min-width: 0; /* remove any min width */
+    box-sizing: border-box;
+  }
+
+  .continent-group > button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    flex-shrink: 1; /* allow shrinking */
+    min-width: 0; /* remove any minimum imposed by flex */
+  }
+
+  .country-buttons button img {
+    width: 20px;
+    height: 20px;
+    border-radius: 25px;
+    transition: filter 0.2s;
+    /* border: #cfc8ba solid 1.5px; */
+    flex-shrink: 0; /* prevents image from shrinking too small */
+    box-shadow: 0 0 3px #cfc8ba50;
+  }
+
+  @media (max-width: 1440px) {
+    .country-buttons button span {
+      display: none;
+    }
+  }
+
+  /* =========================================================
+   CONTINENT BUTTONS
+   ========================================================= */
+
+  .continent-group > button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 2px 2px;
+    box-sizing: border-box;
+    white-space: nowrap;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .continent-group > button img,
+  .country-flag {
+    width: 20px;
+    height: 20px;
+    border-radius: 25px;
+    vertical-align: middle;
+    transition: filter 0.2s;
+    border: #132429 solid 1px;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 1440px) {
+    .continent-group > button span {
+      display: none;
+    }
+  }
+}
