@@ -11,6 +11,10 @@ fetch("./items.json")
   })
   .catch((err) => console.error("Failed to load items.json:", err));
 
+function isSmallScreen() {
+  return window.matchMedia("(max-width: 1440px)").matches;
+}
+
 // Placeholder flags
 const countryFlags = {
   "U.S.A": "images/flags/USA.png",
@@ -82,23 +86,18 @@ function startApp() {
     .filter(Boolean)
     .sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }));
 
-
-
-
   // ------------------- RENDER ITEM -------------------
-function renderItem() {
-  const wrapper = document.getElementById("image-wrapper");
-  const item = filteredItems[currentIndex];
+  function renderItem() {
+    const wrapper = document.getElementById("image-wrapper");
+    const item = filteredItems[currentIndex];
 
-  if (!item) {
-    wrapper.innerHTML = `<div class="no-results">No items match your filters.</div>`;
-    return;
+    if (!item) {
+      wrapper.innerHTML = `<div class="no-results">No items match your filters.</div>`;
+      return;
+    }
+
+    wrapper.innerHTML = `<img src="${item.image}" alt="${item.name}">`;
   }
-
-  wrapper.innerHTML = `<img src="${item.image}" alt="${item.name}">`;
-}
-
-
 
   // ------------------- FILTERS -------------------
   function applyFilters() {
@@ -355,8 +354,11 @@ function renderItem() {
   // ------------------- NUMERIC SORT -------------------
   const numericContainer = document.getElementById("numeric-filters");
   const toggleBtn = document.getElementById("toggleOrderBtn");
-  if (toggleBtn && !numericContainer.contains(toggleBtn))
-    numericContainer.insertBefore(toggleBtn, numericContainer.firstChild);
+
+  // ---------- TOGGLE PLACEHOLDER ----------
+  const togglePlaceholder = document.createElement("div");
+  toggleBtn.parentNode.insertBefore(togglePlaceholder, toggleBtn);
+  togglePlaceholder.appendChild(toggleBtn);
 
   const allowedNumeric = [
     "Crew",
@@ -375,6 +377,7 @@ function renderItem() {
     "Thrust - kn",
     "Quantity Produced",
   ];
+
   const numericKeys = allowedNumeric.filter((k) =>
     items.some((i) => typeof i[k] === "number")
   );
@@ -400,7 +403,12 @@ function renderItem() {
         activeSort = key;
         ascending = false;
       }
-      if (toggleBtn) numericContainer.insertBefore(toggleBtn, btn);
+
+      // Only reorder toggle on LARGE screens
+      if (toggleBtn && !isSmallScreen()) {
+        numericContainer.insertBefore(toggleBtn, btn);
+      }
+
       applyFilters();
     });
 
@@ -424,30 +432,34 @@ function renderItem() {
 
   // ------------------- RESET -------------------
   const resetBtn = document.getElementById("resetBtn");
+
   if (resetBtn) {
     resetBtn.addEventListener("click", () => {
-      selected.continents.length = 0;
-      selected.countries.length = 0;
-      selected.hair.length = 0;
-      selected.eye.length = 0;
-      selected.gender.length = 0;
-      selected.role.length = 0;
-      selected.type.length = 0;
+      // Clear all selections
+      Object.keys(selected).forEach((k) => (selected[k].length = 0));
 
+      // Reset sort
       activeSort = null;
       ascending = true;
 
+      // Reset checkboxes & dropdowns
       document
         .querySelectorAll("#extra-filters input[type=checkbox]")
         .forEach((cb) => (cb.checked = false));
       document
         .querySelectorAll("#extra-filters > .dropdown-filter > button")
-        .forEach((b) => b.classList.remove("active"));
+        .forEach((b) => {
+          b.classList.remove("active");
+          b.classList.add("inactive");
+        });
+
       numericContainer
         .querySelectorAll("button")
         .forEach((b) => b.classList.remove("active"));
-      if (toggleBtn) {
-        numericContainer.prepend(toggleBtn);
+
+      // Restore toggle button to placeholder
+      if (toggleBtn && togglePlaceholder) {
+        togglePlaceholder.appendChild(toggleBtn);
         toggleBtn.classList.remove("asc-active", "desc-active");
       }
 
@@ -520,14 +532,12 @@ function renderItem() {
     imageModal.classList.add("show");
   });
 
-  // Close modal when clicking outside the image
   imageModal.addEventListener("click", (e) => {
     if (e.target === imageModal) {
       imageModal.classList.remove("show");
     }
   });
 
-  // Close modal when pressing Escape
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       imageModal.classList.remove("show");
