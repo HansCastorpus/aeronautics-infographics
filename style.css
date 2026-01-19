@@ -289,6 +289,7 @@ button.inactive {
   grid-template-columns: auto 1fr;
   align-items: start;
   gap: 16px;
+  padding-top: 15px;
 }
 
 .Header-Title {
@@ -377,7 +378,6 @@ button.inactive {
   gap: 4px;
   flex-shrink: 1;
   min-width: 0;
-  
 }
 
 .country-buttons button img {
@@ -422,7 +422,6 @@ button.inactive {
   border: #132429 solid 1px;
   flex-shrink: 0;
 }
-
 
 /* =========================================================
    DROPDOWN FILTERS
@@ -574,20 +573,15 @@ button.inactive {
   display: block;
 }
 
-#display img {
-  width: 100%;
-  height: auto;
-  display: block;
-  max-height: none;
-}
-
 .image-wrapper img {
   flex-shrink: 0;
 }
 
 @media (max-width: 2560px) {
   #display img {
-    width: 100%;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
   }
   .image-wrapper {
     flex-direction: column;
@@ -610,6 +604,8 @@ button.inactive {
   border: none;
   cursor: pointer;
   z-index: 10;
+  padding: 10px;
+  border: #7d8f85 1px solid;
 
   height: 25%;
   width: 10px;
@@ -630,6 +626,16 @@ button.inactive {
 .nav-arrow-left:hover,
 .nav-arrow-right:hover {
   background-color: rgba(0, 0, 0, 0.6);
+}
+
+@media (max-width: 2560px) {
+  .nav-arrow-left {
+  left: 15px;
+}
+
+.nav-arrow-right {
+  right: 15px;
+}  
 }
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
@@ -888,8 +894,6 @@ button.inactive {
     align-items: center;
   }
 
-
-
   .dropdown-filter button span {
     display: inline;
   }
@@ -977,8 +981,6 @@ button.inactive {
   .country-buttons button {
     padding: 1px 1px;
   }
-
-
 
   @media (max-width: 2560px) {
     .country-buttons button span {
