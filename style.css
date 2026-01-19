@@ -7,7 +7,9 @@
   --accent-color: #e6e4e2;
   --border-button-color: #cfccc7;
   --clicked-button: #7c8e84;
-  --clicked-text: #3b484d;
+  --clicked-text: #22282b;
+  --text-color-button: #132429;
+  --hover-color-button: #97a59f;
 }
 
 body {
@@ -26,7 +28,7 @@ body {
 button {
   font-weight: 500;
   background-color: var(--accent-color);
-  color: #132429;
+  color: var(--text-color-button);
   padding: 8px 12px;
   border-radius: 20px;
   border: 0.01px solid var(--border-button-color);
@@ -37,8 +39,8 @@ button {
 }
 
 button:hover {
-  background-color: #2a3747 !important;
-  color: #cfc8ba !important;
+  background-color: var(--hover-color-button) !important;
+  color: var(--clicked-text) !important;
 }
 
 button.active {
@@ -115,6 +117,79 @@ button.inactive {
   text-transform: uppercase;
 }
 
+#image-wrapper {
+  position: relative; /* container for relative positioning */
+  display: inline-block;
+  width: 100%;
+  max-width: 100%;
+}
+
+.extra-image {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  backdrop-filter: blur(8px);
+}
+
+.extra-image .image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.extra-image img {
+  max-width: 1000px;   /* maximum width */
+  max-height: 400px;  /* maximum height */
+  width: auto;        /* let it scale naturally */
+  height: auto;       /* let it scale naturally */
+  min-width: 100%;    /* force small images to scale up to container width */
+  min-height: 100%;   /* force small images to scale up to container height */
+  object-fit: contain; /* preserve aspect ratio */
+  border: #122431 11px solid;
+  border-radius: 150px;
+}
+
+.extra-image .image-caption {
+  font-size: 0.85rem;
+  color: #353e47;
+  text-align: center;
+  max-width: 80%;
+  font-weight: 300;
+}
+
+
+
+
+.extra-image.show {
+  display: flex; /* show modal */
+}
+
+#showImageBtn .hide {
+  display: none;
+}
+
+#showImageBtn.active .show {
+  display: none;
+}
+
+#showImageBtn.active .hide {
+  display: inline;
+}
+
+#showImageBtn {
+  min-width: 100%;      /* tune once, done forever */
+  height: 40px;          /* optional but improves consistency */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
 /* =========================================================
    NUMERIC SORT BLOCK
    ========================================================= */
@@ -128,7 +203,7 @@ button.inactive {
 }
 
 #sort-controls {
-  padding: 20px 20px 20px 20px;
+  padding: 10px 0px 10px 0px;
   box-sizing: border-box;
   border-bottom: #7c8e84 0.25px solid;
   border-top: #7c8e84 0.25px solid;
@@ -144,7 +219,6 @@ button.inactive {
 #numeric-filters button {
   display: inline-flex;
   align-items: center;
-  justify-content: flex-start;
   gap: 6px;
   padding: 6px 10px;
   min-width: 0;
@@ -154,8 +228,8 @@ button.inactive {
 
 /* Numeric button icons */
 #numeric-filters button img {
-  width: 22px;
-  height: 22px;
+  width: 30px;
+  height: 30px;
   border-radius: 4px;
   flex-shrink: 0;
 }
@@ -163,8 +237,8 @@ button.inactive {
 /* ---- SORT TOGGLE ---- */
 
 .ToggleButton {
-    padding-bottom: 10px;
-    padding-top: 10px;
+  padding-bottom: 10px;
+  padding-top: 10px;
 }
 
 .sort-toggle {
@@ -201,7 +275,8 @@ button.inactive {
 
 #toggleOrderBtn {
   color: #000000;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
   /* width: 20% !important; */
   /* margin-top: 20px; */
 }
@@ -257,9 +332,9 @@ button.inactive {
   text-align: right;
 
   /* --- Responsive font scaling --- */
-  font-size: clamp(0.5rem, 1.5vw + 0.4rem, 2rem) !important;
+  font-size: clamp(10px, 1vw, 48px);
   line-height: 1.1;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 /* =========================================================
@@ -423,9 +498,10 @@ button.inactive {
 }
 
 .dropdown-button-icon {
-  width: 24px;
-  height: 24px;
+  width: 30px;
+  height: 30px;
   border-radius: 50px;
+  object-fit: contain;
 }
 
 .dropdown-filter button span {
@@ -436,8 +512,8 @@ button.inactive {
   font-weight: 500;
   background-color: var(--accent-color);
   color: #08151d;
-  padding: 8px 12px;
-  border-radius: 20px;
+  padding: 6px 10px;
+  border-radius: 50px;
   border: 0.01px solid var(--border-button-color);
   cursor: pointer;
   align-items: center;
@@ -568,7 +644,7 @@ button.inactive {
   width: 100%; /* image fills the width of #display */
   height: auto; /* maintain aspect ratio */
   display: block; /* remove inline spacing */
-  border-radius: 8px;
+  /* border-radius: 8px; */
   /* border: #cfc8ba solid 0.25px; */
 }
 
@@ -580,7 +656,6 @@ button.inactive {
 }
 
 .image-wrapper img {
-  border-radius: 8px;
   flex-shrink: 0;
 }
 
@@ -597,7 +672,6 @@ button.inactive {
 @media (max-width: 1366px) {
   #display img {
     width: 100%;
-    height: 50%;
   }
   .image-wrapper {
     flex-direction: column;
@@ -626,7 +700,7 @@ button.inactive {
   width: 10px;
 
   display: flex;
-  align-items: center;     /* vertical centering */
+  align-items: center; /* vertical centering */
   justify-content: center; /* horizontal centering */
 }
 
@@ -660,6 +734,7 @@ button.inactive {
     max-width: 100px;
     padding: 0 5px;
     overflow: hidden;
+    display: block;
   }
 
   /* Hide descriptive text */
@@ -677,19 +752,19 @@ button.inactive {
   }
 
   #numeric-filters button {
-    display: inline-flex;            /* match dropdown */
+    display: inline-flex; /* match dropdown */
     align-items: center;
-    justify-content: flex-start;     /* left-align content like dropdown */
-    padding: 2px 2px;               /* same as dropdown buttons */
-    border-radius: 20px;             /* match dropdown */
+    justify-content: flex-start; /* left-align content like dropdown */
+    padding: 2px 2px; /* same as dropdown buttons */
+    border-radius: 20px; /* match dropdown */
     background-color: var(--accent-color);
     color: #08151d;
     border: 0.01px solid var(--border-button-color);
     cursor: pointer;
     box-sizing: border-box;
     gap: 6px;
-    height: auto;                    /* let content define height */
-    width: 100%;                     /* fill the grid cell */
+    height: auto; /* let content define height */
+    width: 100%; /* fill the grid cell */
   }
 
   #numeric-filters button.active {
@@ -727,33 +802,14 @@ button.inactive {
   }
 
   /* ---------- Reset button ---------- */
- /* Ensure numeric grid stretches to left column */
+  /* Ensure numeric grid stretches to left column */
   #numeric-filters {
     width: 100%;
   }
 
-  /* ---------- Reset button ---------- */
-  #resetBtn {
-    width: 100%;
-    height: 55px;
-    padding: 0;
-    font-size: 0; /* hide original text */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  #resetBtn::after {
-    content: "Reset Filters";
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--clicked-text);
-    pointer-events: none;
-  }
-
   /* ---------- Toggle wrapper ---------- */
   #numeric-filters .ToggleButton {
-    grid-column: 1 / -1;  /* span full grid */
+    grid-column: 1 / -1; /* span full grid */
     width: 100%;
     height: 55px;
     display: flex;
@@ -761,12 +817,12 @@ button.inactive {
 
   /* ---------- Toggle button ---------- */
   #toggleOrderBtn {
-    flex: 1;              /* fill wrapper */
+    flex: 1; /* fill wrapper */
     width: 100%;
-    height: 55px;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: row;
   }
 
   #toggleOrderBtn .sort-icon {
@@ -779,22 +835,10 @@ button.inactive {
   #toggleOrderBtn.desc-active .desc {
     opacity: 1;
   }
-
 }
 
 #numeric-filters .ToggleButton {
   grid-column: 1 / -1; /* spans full width of grid */
-}
-
-/* Initially hide the image */
-.extra-image {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
 }
 
 .top-right-btn {
@@ -927,7 +971,7 @@ button.inactive {
     flex-direction: column;
     gap: 5px;
     flex-wrap: wrap;
-    height: 193px;
+    height: 194px;
   }
 
   /* ---------------- DROPDOWN FILTERS ---------------- */
@@ -1124,4 +1168,47 @@ button.inactive {
       display: none;
     }
   }
+
+  /* Dropdown panel styling */
+  .dropdown-panel {
+    top: auto;           /* remove previous top */
+    bottom: 100%;        /* position above the button */
+    right: 0;            /* align right edge of panel with button */
+    left: auto;          /* ignore left */
+    transform: translate(0, 0); /* no extra transform needed */
+  }
+
+  .extra-image {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  backdrop-filter: blur(8px);
+}
+
+.extra-image .image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.extra-image img {
+  max-width: 800px;   /* maximum width */
+  max-height: 400px;  /* maximum height */
+  width: auto;        /* let it scale naturally */
+  height: auto;       /* let it scale naturally */
+  min-width: 100%;    /* force small images to scale up to container width */
+  min-height: 100%;   /* force small images to scale up to container height */
+  object-fit: contain; /* preserve aspect ratio */
+  border: #122431 11px solid;
+  border-radius: 150px;
+}
+
+
 }
