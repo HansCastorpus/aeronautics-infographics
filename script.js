@@ -51,6 +51,10 @@ function startApp() {
     era: [],
   };
 
+  const showImageBtn = document.getElementById("showImageBtn");
+  const imageModal = document.getElementById("imageModal");
+  const modalImg = imageModal.querySelector("img");
+
   let filteredItems = items;
   let activeSort = null;
   let ascending = true;
@@ -73,18 +77,41 @@ function startApp() {
   const EngineBuilders = [...new Set(items.map((p) => p.EngineBuilder))]
     .filter(Boolean)
     .sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }));
-  const Role = [...new Set(items.map((p) => p.Role))]
-    .filter(Boolean)
-    .sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }));
-  const Type = [...new Set(items.map((p) => p.Type))]
-    .filter(Boolean)
-    .sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }));
-  const Scale = [...new Set(items.map((p) => p.Scale))]
-    .filter(Boolean)
-    .sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }));
-  const Era = [...new Set(items.map((p) => p.Era))]
-    .filter(Boolean)
-    .sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }));
+  const Role = [
+    ...new Set(
+      items
+        .map((p) => (Array.isArray(p.Role) ? p.Role : [p.Role]))
+        .flat()
+        .filter(Boolean)
+    ),
+  ].sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }));
+
+  const Type = [
+    ...new Set(
+      items
+        .map((p) => (Array.isArray(p.Type) ? p.Type : [p.Type]))
+        .flat()
+        .filter(Boolean)
+    ),
+  ].sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }));
+
+  const Scale = [
+    ...new Set(
+      items
+        .map((p) => (Array.isArray(p.Scale) ? p.Scale : [p.Scale]))
+        .flat()
+        .filter(Boolean)
+    ),
+  ].sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }));
+
+  const Era = [
+    ...new Set(
+      items
+        .map((p) => (Array.isArray(p.Era) ? p.Era : [p.Era]))
+        .flat()
+        .filter(Boolean)
+    ),
+  ].sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }));
 
   // ------------------- RENDER ITEM -------------------
   function renderItem() {
@@ -102,6 +129,7 @@ function startApp() {
   // ------------------- FILTERS -------------------
   function applyFilters() {
     filteredItems = items.filter((item) => {
+      // ---------------- SINGLE-VALUE FIELDS ----------------
       const contMatch =
         selected.continents.length === 0 ||
         selected.continents.includes(item.Continent);
@@ -115,14 +143,24 @@ function startApp() {
       const genderMatch =
         selected.gender.length === 0 ||
         selected.gender.includes(item.EngineBuilder);
-      const roleMatch =
-        selected.role.length === 0 || selected.role.includes(item.Role);
-      const typeMatch =
-        selected.type.length === 0 || selected.type.includes(item.Type);
-      const scaleMatch =
-        selected.scale.length === 0 || selected.scale.includes(item.Scale);
-      const eraMatch =
-        selected.era.length === 0 || selected.era.includes(item.Era);
+
+      // ---------------- MULTI-VALUE FIELDS (ALL SELECTED MUST MATCH) ----------------
+      function matchesMultiExact(fieldValue, selectedArray) {
+        if (!fieldValue) return selectedArray.length === 0; // no value only matches if nothing is selected
+        if (selectedArray.length === 0) return true; // nothing selected, match everything
+
+        const fieldArr = Array.isArray(fieldValue) ? fieldValue : [fieldValue];
+
+        // Check that every selected value exists in the field array
+        return selectedArray.every((val) => fieldArr.includes(val));
+      }
+
+      const roleMatch = matchesMultiExact(item.Role, selected.role);
+      const typeMatch = matchesMultiExact(item.Type, selected.type);
+      const scaleMatch = matchesMultiExact(item.Scale, selected.scale);
+      const eraMatch = matchesMultiExact(item.Era, selected.era);
+
+      // ---------------- COMBINE ALL ----------------
       return (
         contMatch &&
         countryMatch &&
@@ -136,6 +174,7 @@ function startApp() {
       );
     });
 
+    // ---------------- SORTING ----------------
     if (activeSort) {
       filteredItems.sort((a, b) => {
         const av = Number(a[activeSort]) || 0;
@@ -250,6 +289,21 @@ function startApp() {
   // ------------------- DROPDOWNS -------------------
   const extraFiltersDiv = document.getElementById("extra-filters");
 
+  // Helper to flatten all values for a field (supports arrays in JSON)
+  function getUniqueOptions(fieldArray) {
+    return [
+      ...new Set(
+        fieldArray
+          .map((item) => {
+            if (!item) return [];
+            return Array.isArray(item) ? item : [item]; // handle single values and arrays
+          })
+          .flat()
+          .filter(Boolean)
+      ),
+    ].sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }));
+  }
+
   function createDropdown(label, options, targetArray) {
     const container = document.createElement("div");
     container.className = "dropdown-filter";
@@ -339,13 +393,23 @@ function startApp() {
     });
   }
 
-  createDropdown("Aircraft Name", AircraftNames, selected.hair);
-  createDropdown("Company", Companies, selected.eye);
-  createDropdown("Engine Manufacturer", EngineBuilders, selected.gender);
-  createDropdown("Role", Role, selected.role);
-  createDropdown("Type", Type, selected.type);
-  createDropdown("Scale", Scale, selected.scale);
-  createDropdown("Era", Era, selected.era);
+  // ------------------- CREATE DROPDOWNS -------------------
+  // Flatten arrays in JSON so multi-value fields are separate options
+  createDropdown(
+    "Aircraft Name",
+    getUniqueOptions(AircraftNames),
+    selected.hair
+  );
+  createDropdown("Company", getUniqueOptions(Companies), selected.eye);
+  createDropdown(
+    "Engine Manufacturer",
+    getUniqueOptions(EngineBuilders),
+    selected.gender
+  );
+  createDropdown("Role", getUniqueOptions(Role), selected.role);
+  createDropdown("Type", getUniqueOptions(Type), selected.type);
+  createDropdown("Scale", getUniqueOptions(Scale), selected.scale);
+  createDropdown("Era", getUniqueOptions(Era), selected.era);
 
   document.querySelectorAll(".dropdown-filter button").forEach((button) => {
     button.classList.remove("active");
@@ -357,8 +421,25 @@ function startApp() {
 
   // ---------- TOGGLE PLACEHOLDER ----------
   const togglePlaceholder = document.createElement("div");
+  togglePlaceholder.className = "toggle-placeholder";
   toggleBtn.parentNode.insertBefore(togglePlaceholder, toggleBtn);
   togglePlaceholder.appendChild(toggleBtn);
+
+  function placeToggleCorrectly(referenceBtn = null) {
+    if (!toggleBtn) return;
+
+    if (isSmallScreen()) {
+      // ALWAYS lock toggle back to placeholder on small screens
+      if (toggleBtn.parentNode !== togglePlaceholder) {
+        togglePlaceholder.appendChild(toggleBtn);
+      }
+    } else {
+      // On large screens, move next to active numeric button
+      if (referenceBtn) {
+        numericContainer.insertBefore(toggleBtn, referenceBtn);
+      }
+    }
+  }
 
   const allowedNumeric = [
     "Crew",
@@ -405,10 +486,7 @@ function startApp() {
       }
 
       // Only reorder toggle on LARGE screens
-      if (toggleBtn && !isSmallScreen()) {
-        numericContainer.insertBefore(toggleBtn, btn);
-      }
-
+      placeToggleCorrectly(btn);
       applyFilters();
     });
 
@@ -524,24 +602,80 @@ function startApp() {
 
   bindExternalArrows();
 
-  // ------------------- PHOTO MODAL -------------------
-  const showImageBtn = document.getElementById("showImageBtn");
-  const imageModal = document.getElementById("imageModal");
+  // ------------------- LEFT-COLUMN EXTRA IMAGE MODAL -------------------
 
-  showImageBtn.addEventListener("click", () => {
-    imageModal.classList.add("show");
-  });
+  showImageBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
 
-  imageModal.addEventListener("click", (e) => {
-    if (e.target === imageModal) {
-      imageModal.classList.remove("show");
+    const isOpen = imageModal.classList.contains("show");
+
+    if (isOpen) {
+      closeExtraImage();
+      return;
     }
+
+    const currentItem = filteredItems[currentIndex];
+    if (!currentItem?.extraImage) return;
+
+    modalImg.src = currentItem.extraImage;
+    modalImg.alt = currentItem.AircraftName || "Extra Image";
+
+    // Set copyright caption
+    const captionDiv = imageModal.querySelector(".image-caption");
+    captionDiv.textContent = currentItem.copyright || "";
+
+    imageModal.classList.add("show");
+    showImageBtn.classList.add("active");
   });
 
+  // Escape key still closes
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
-      imageModal.classList.remove("show");
+      closeExtraImage();
     }
+  });
+
+  // Close on ANY click on the overlay
+  imageModal.addEventListener("click", () => {
+    closeExtraImage();
+  });
+
+  function closeExtraImage() {
+    imageModal.classList.remove("show");
+    showImageBtn.classList.remove("active");
+  }
+
+  showImageBtn.classList.add("active"); // when opening
+  showImageBtn.classList.remove("active"); // when closing
+
+  // Close extra image when navigating
+  const navArrows = [
+    document.getElementById("prevBtn"),
+    document.getElementById("nextBtn"),
+  ];
+
+  navArrows.forEach((arrow) => {
+    arrow.addEventListener("click", () => {
+      closeExtraImage(); // reuses your existing function
+    });
+  });
+
+  // Get all buttons on the page except the show image button
+  const allButtons = Array.from(document.querySelectorAll("button")).filter(
+    (btn) => btn !== showImageBtn
+  );
+
+  // Close extra image whenever any of these buttons is clicked
+  allButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      closeExtraImage();
+    });
+  });
+
+  // Confused as to what that does
+
+  window.addEventListener("resize", () => {
+    placeToggleCorrectly();
   });
 
   // ------------------- INITIALIZE -------------------
