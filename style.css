@@ -10,7 +10,7 @@
   --clicked-text: #22282b;
   --text-color-button: #132429;
   --hover-color-button: #97a59f;
-  --screen-size-change: 2560px;
+  --screen-size-change: 2440px;
 }
 
 body {
@@ -30,7 +30,6 @@ button {
   font-weight: 500;
   background-color: var(--accent-color);
   color: var(--text-color-button);
-  padding: 0px 8px 0px 0px;
   border-radius: 50px;
   border: 0.01px solid var(--border-button-color);
   cursor: pointer;
@@ -389,7 +388,7 @@ button.inactive {
   box-shadow: 0 0 5px #00000050;
 }
 
-@media (max-width: 2560px) {
+@media (max-width: 2440px) {
   .country-buttons button span {
     display: none;
   }
@@ -519,7 +518,7 @@ button.inactive {
 }
 
 /* Responsive: hide dropdown text on smaller screens */
-@media (max-width: 2560px) {
+@media (max-width: 2440px) {
   .dropdown-filter > button span {
     display: none;
   }
@@ -577,7 +576,7 @@ button.inactive {
   flex-shrink: 0;
 }
 
-@media (max-width: 2560px) {
+@media (max-width: 2440px) {
   #display img {
     width: 95%;
     margin-left: auto;
@@ -628,14 +627,14 @@ button.inactive {
   background-color: rgba(0, 0, 0, 0.6);
 }
 
-@media (max-width: 2560px) {
+@media (max-width: 2440px) {
   .nav-arrow-left {
-  left: 15px;
-}
+    left: 15px;
+  }
 
-.nav-arrow-right {
-  right: 15px;
-}  
+  .nav-arrow-right {
+    right: 15px;
+  }
 }
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
@@ -649,13 +648,15 @@ button.inactive {
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
-@media (max-width: 2560px) {
+@media (max-width: 2440px) {
   /* ---------- Column container ---------- */
   .left-column {
     max-width: 106px;
     padding: 0 5px;
     overflow: hidden;
     display: block;
+    border-right: #22282b 1px solid;
+    padding-right: 10px;
   }
 
   .Information {
@@ -782,7 +783,7 @@ button.inactive {
 /* ======================================================================= */
 /* ======================================================================= */
 
-@media (max-width: 2560px) {
+@media (max-width: 2440px) {
   /* Main container becomes two columns */
   #main-container {
     display: grid;
@@ -816,6 +817,8 @@ button.inactive {
     flex-direction: column; /* stack buttons vertically */
     align-items: flex-start;
     max-height: 100vh; /* ensure it doesn’t overflow the viewport */
+    border-left: #22282b 1px solid;
+    padding-left: 10px;
   }
 
   #continent-country-block {
@@ -957,7 +960,7 @@ button.inactive {
   }
 
   /* Responsive: hide dropdown text on smaller screens */
-  @media (max-width: 2560px) {
+  @media (max-width: 2440px) {
     .dropdown-filter > button span {
       display: none; /* keeps icon and arrow only */
     }
@@ -982,7 +985,7 @@ button.inactive {
     padding: 1px 1px;
   }
 
-  @media (max-width: 2560px) {
+  @media (max-width: 2440px) {
     .country-buttons button span {
       display: none;
     }
@@ -1034,15 +1037,14 @@ button.inactive {
   }
 
   .extra-image img {
-  max-width: 1000px;
-  /* max-height: 400px; */
-  width: auto;
-  height: auto;
-  min-width: 60%;
-  min-height: 60%;
-  object-fit: contain;
-  border: #122431 11px solid;
-  border-radius: 150px;
-}
+    max-width: 1000px;
+    /* max-height: 400px; */
+    width: auto;
+    height: auto;
+    min-width: 60%;
+    min-height: 60%;
+    object-fit: contain;
+    border: #122431 11px solid;
+    border-radius: 150px;
   }
 }
