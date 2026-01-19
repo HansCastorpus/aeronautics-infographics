@@ -141,12 +141,12 @@ button.inactive {
 }
 
 .extra-image img {
-  max-width: 1000px;
-  max-height: 400px;
+  max-width: 1300px;
+  /* max-height: 400px; */
   width: auto;
   height: auto;
-  min-width: 100%;
-  min-height: 100%;
+  min-width: 60%;
+  min-height: 60%;
   object-fit: contain;
   border: #122431 11px solid;
   border-radius: 150px;
@@ -1034,14 +1034,15 @@ button.inactive {
   }
 
   .extra-image img {
-    max-width: 800px; /* maximum width */
-    max-height: 400px; /* maximum height */
-    width: auto; /* let it scale naturally */
-    height: auto; /* let it scale naturally */
-    min-width: 100%; /* force small images to scale up to container width */
-    min-height: 100%; /* force small images to scale up to container height */
-    object-fit: contain; /* preserve aspect ratio */
-    border: #122431 11px solid;
-    border-radius: 150px;
+  max-width: 1000px;
+  /* max-height: 400px; */
+  width: auto;
+  height: auto;
+  min-width: 60%;
+  min-height: 60%;
+  object-fit: contain;
+  border: #122431 11px solid;
+  border-radius: 150px;
+}
   }
 }
