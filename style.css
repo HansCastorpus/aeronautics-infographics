@@ -10,6 +10,7 @@
   --clicked-text: #22282b;
   --text-color-button: #132429;
   --hover-color-button: #97a59f;
+  --screen-size-change: 2560px;
 }
 
 body {
@@ -388,7 +389,7 @@ button.inactive {
   box-shadow: 0 0 5px #00000050;
 }
 
-@media (max-width: 1500px) {
+@media (max-width: 2560px) {
   .country-buttons button span {
     display: none;
   }
@@ -519,7 +520,7 @@ button.inactive {
 }
 
 /* Responsive: hide dropdown text on smaller screens */
-@media (max-width: 1500px) {
+@media (max-width: 2560px) {
   .dropdown-filter > button span {
     display: none;
   }
@@ -584,7 +585,7 @@ button.inactive {
   flex-shrink: 0;
 }
 
-@media (max-width: 1500px) {
+@media (max-width: 2560px) {
   #display img {
     width: 100%;
   }
@@ -642,7 +643,7 @@ button.inactive {
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
-@media (max-width: 1500px) {
+@media (max-width: 2560px) {
   /* ---------- Column container ---------- */
   .left-column {
     max-width: 106px;
@@ -775,7 +776,7 @@ button.inactive {
 /* ======================================================================= */
 /* ======================================================================= */
 
-@media (max-width: 1500px) {
+@media (max-width: 2560px) {
   /* Main container becomes two columns */
   #main-container {
     display: grid;
@@ -952,7 +953,7 @@ button.inactive {
   }
 
   /* Responsive: hide dropdown text on smaller screens */
-  @media (max-width: 1500px) {
+  @media (max-width: 2560px) {
     .dropdown-filter > button span {
       display: none; /* keeps icon and arrow only */
     }
@@ -979,7 +980,7 @@ button.inactive {
 
 
 
-  @media (max-width: 1500px) {
+  @media (max-width: 2560px) {
     .country-buttons button span {
       display: none;
     }
