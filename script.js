@@ -12,7 +12,7 @@ fetch("./items.json")
   .catch((err) => console.error("Failed to load items.json:", err));
 
 function isSmallScreen() {
-  return window.matchMedia("(max-width: 1440px)").matches;
+  return window.matchMedia("(max-width: 2560px)").matches;
 }
 
 // Placeholder flags
