@@ -29,7 +29,7 @@ button {
   font-weight: 500;
   background-color: var(--accent-color);
   color: var(--text-color-button);
-  padding: 3px 12px;
+  padding: 0px 8px 0px 0px;
   border-radius: 50px;
   border: 0.01px solid var(--border-button-color);
   cursor: pointer;
@@ -362,7 +362,7 @@ button.inactive {
   align-items: center;
   justify-content: center;
   gap: 4px;
-  padding: 6px 10px;
+  padding: 0px 8px 0px 0px;
   flex-shrink: 1;
   min-width: 0;
   box-sizing: border-box;
@@ -376,11 +376,12 @@ button.inactive {
   gap: 4px;
   flex-shrink: 1;
   min-width: 0;
+  
 }
 
 .country-buttons button img {
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   border-radius: 25px;
   transition: filter 0.2s;
   flex-shrink: 0;
@@ -401,9 +402,9 @@ button.inactive {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 4px;
-  padding: 6px 10px;
+  padding: 1px 8px 1px 1px;
   box-sizing: border-box;
   white-space: nowrap;
   text-align: center;
@@ -412,8 +413,8 @@ button.inactive {
 
 .continent-group > button img,
 .country-flag {
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   border-radius: 25px;
   vertical-align: middle;
   transition: filter 0.2s;
@@ -447,8 +448,8 @@ button.inactive {
 }
 
 .dropdown-button-icon {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   object-fit: contain;
 }
 
@@ -460,7 +461,7 @@ button.inactive {
   font-weight: 500;
   background-color: var(--accent-color);
   color: #08151d;
-  padding: 4px 10px;
+  padding: 0px 8px 0px 0px;
   border: 0.01px solid var(--border-button-color);
   cursor: pointer;
   align-items: center;
